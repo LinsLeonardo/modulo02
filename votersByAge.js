@@ -11,7 +11,18 @@ const voters = [ {name:'Bob' , age: 30, voted: true},
 {name: 'Jeff', age: 30, voted: true}, 
 {name: 'Zack', age: 19, voted: false} ]
 
-  voters.reduce((acc, voter) => {
+const young = {inicial: 18, final: 25}
+const mid = {inicial: 26, final: 35}
+const old = {inicial: 36, final: 55}
+const ages = {young, mid, old}
+
+const initialValue = Object.keys(ages)
+    .reduce(
+    (acc, idade) => ({...acc, [idade]:
+        {votesCount: 0, peopleCount: 0}}), {}  
+    )
+
+voters.reduce((acc, voter) => {
 	if (voter.age >= 18 && voter.age <=25) {
 		return {
 			...acc, 
@@ -38,8 +49,4 @@ const voters = [ {name:'Bob' , age: 30, voted: true},
 		}
 	}
 	
-}, {
-	young: {votesCount: 0, peopleCount: 0},
-	mid: {votesCount: 0, peopleCount: 0},
-	old: {votesCount: 0, peopleCount: 0},
-}) 
+}, initialValue) 
