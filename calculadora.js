@@ -40,9 +40,12 @@ let calculadora = (() => {
     const list = () => {
     	let map = new Map()
 
-    	for(const array of _operationsHistory){
-            map.set(`${array[0]} ${array[1]} ${array[2]}`, calculateWithOperator(array))
-
+        for(const array of _operationsHistory){
+        	let _arrayConcatenado = ''
+            for(const valor of array) {
+                  _arrayConcatenado += `${valor}`
+            }
+        	map.set(_arrayConcatenado, calculateWithOperator(array))
         }
         return map
     }
