@@ -4,7 +4,6 @@ const person = [ { name: "Angelina Jolie", age: 80 },
 { name: "Kayne West", age: 16 },
 { name: "Bob Ziroll", age: 100 } ]
 
-const checkIfPersonCanWatch = person.map(person => person.age > 18 ? `${person.name} can go to The Matrix` 
-                              : `${person.name} is under age!!`);
+const checkIfPersonCanWatch = person.map(person => person.age > 18 ? `${person.name} can go to The Matrix` : `${person.name} is under age!!`);
 
 checkIfPersonCanWatch                            

@@ -38,14 +38,14 @@ const calculadora = (() => {
 	} 
 
 
-    const list = () => {
-    	const map = new Map()
-      for(const array of _operationsHistory){
-      		const [firstNumber, operator, secondNumber] = array;
-         	map.set(`${firstNumber} ${operator} ${secondNumber}`, calculateWithOperator(array))
-        }
-      return map
+  const list = () => {
+    const map = new Map()
+    for(const array of _operationsHistory){
+      const [firstNumber, operator, secondNumber] = array;
+      map.set(`${firstNumber} ${operator} ${secondNumber}`, calculateWithOperator(array))
     }
+     return map
+  }
 
 	const reset = () => {
 		_operationsHistory = []
