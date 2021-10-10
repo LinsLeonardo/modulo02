@@ -1,7 +1,19 @@
-let calculadora = (() => {
+const calculadora = (() => {
 
 	let _valuesToOperate = []
 	let _operationsHistory = []
+
+	const soma = (x, y) => x + y 
+	const subtrai = (x,y) => x - y
+	const multiplica = (x, y) => x*y
+	const divide = (x, y) => x / y
+
+	const operadores = {
+		'+': soma,
+		'-': subtrai,
+		'*': multiplica,
+		'/': divide,
+	}
 
 	const enter = (valor) => {
 		if(typeof valor !== 'number' && (valor !== '+' && valor !== '-' && valor !== '*' && valor !== '/' )){
@@ -11,43 +23,28 @@ let calculadora = (() => {
 	}
 
 	const calculateWithOperator = array => {
-		let calculated
-		if(array[1] === '+'){
-            calculated = array[0] + array[2]
-		}
-		if(array[1] === '-'){
-            calculated = array[0] - array[2]
-		}
-		if(array[1] === '*'){
-            calculated = array[0] * array[2]
-		}
-		if(array[1] === '/'){
-            calculated = array[0] / array[2]
-		}
-		return calculated
+		const [firstNumber, operator, secondNumber] = array;
+		return operadores[operator] ? operadores[operator](firstNumber, secondNumber) : 'Operador Inválido'
 	}
 
 	const equals = () => {
-		let _operationResult = calculateWithOperator(_valuesToOperate)
-		
+		if (_valuesToOperate.length < 3){
+			return 'Dados insuficientes para realizar a tarefa, preencha usando calculadora.enter(seuValor)'
+	}
+		const _operationResult = calculateWithOperator(_valuesToOperate)
 		_operationsHistory = [..._operationsHistory, _valuesToOperate]
 		_valuesToOperate = []
-	   
-	    return (_operationResult)
+	  return (_operationResult)
 	} 
 
 
     const list = () => {
-    	let map = new Map()
-
-        for(const array of _operationsHistory){
-        	let _arrayConcatenado = ''
-            for(const valor of array) {
-                  _arrayConcatenado += `${valor}`
-            }
-        	map.set(_arrayConcatenado, calculateWithOperator(array))
+    	const map = new Map()
+      for(const array of _operationsHistory){
+      		const [firstNumber, operator, secondNumber] = array;
+         	map.set(`${firstNumber} ${operator} ${secondNumber}`, calculateWithOperator(array))
         }
-        return map
+      return map
     }
 
 	const reset = () => {
@@ -55,11 +52,10 @@ let calculadora = (() => {
 		_valuesToOperate = []
 	}
 
-    return {
+  return {
         enter,
         equals,
         list,
         reset 
     }
-
 })()
